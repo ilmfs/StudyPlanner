@@ -1,0 +1,31 @@
+﻿@model IEnumerable<StudyPlanner.Models.StudyTask>
+
+<h2>Ближайшие задачи</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div style="color: green">@TempData["Message"]</div>
+}
+
+@foreach (var group in Model.GroupBy(t => t.Subject))
+{
+    <h3>@group.Key</h3>
+
+    <ul>
+        @foreach (var task in group)
+        {
+            <li>
+                <strong>@task.Title</strong> — @task.Deadline.ToShortDateString() — @task.Priority
+
+                @if (!task.IsDone)
+                {
+                    <a asp-action="Done" asp-route-id="@task.Id">Выполнено</a>
+                }
+
+                <a asp-action="Delete" asp-route-id="@task.Id">Удалить</a>
+            </li>
+        }
+    </ul>
+}
+
+<a asp-action="Create">Добавить задачу</a>

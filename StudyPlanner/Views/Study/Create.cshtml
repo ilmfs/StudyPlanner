@@ -1,0 +1,26 @@
+﻿@model StudyPlanner.Models.StudyTaskViewModel
+
+<h2>Добавить задачу</h2>
+
+<form asp-action="Create" method="post">
+    <p>Предмет: <input asp-for="Subject" /></p>
+    <span asp-validation-for="Subject"></span>
+
+    <p>Название: <input asp-for="Title" /></p>
+    <span asp-validation-for="Title"></span>
+
+    <p>Дедлайн: <input asp-for="Deadline" type="date" /></p>
+    <span asp-validation-for="Deadline"></span>
+
+    <p>Приоритет:
+        <select asp-for="Priority">
+            <option value="">Выберите...</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+    </p>
+    <span asp-validation-for="Priority"></span>
+
+    <button type="submit">Добавить</button>
+</form>
